@@ -1,0 +1,25 @@
+{
+    "name": "CLG Grade Calculator",
+    "description": "This extension exists to make it easier to calculate the average grades one must have to pass",
+    "version": "1.0",
+    "manifest_version": 3,
+    "content_scripts": [
+        {
+            "matches": [
+                "https://portail2.clg.qc.ca/colnet/infocours.asp*"
+            ],
+            "js": [
+                "jquery-3.6.0.js",
+                "content.js"
+            ],
+            "run_at": "document_idle"
+        }
+    ],
+    "options_page": "setting.html",
+    "icons": {
+        "16": "/images/icon16.png",
+        "48": "/images/icon48.png",
+        "128": "/images/icon128.png"
+    },
+    "permissions": ["storage"]
+}
