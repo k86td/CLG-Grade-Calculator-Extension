@@ -1,0 +1,62 @@
+* {
+    font-family: Ubuntu Mono;
+}
+
+html {
+    margin: 25px;
+}
+
+#add > td:last-child {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+    text-decoration: underline;
+}
+
+body {
+    padding: 25px;
+    border: 1px solid black;
+    margin: auto;
+    width: 50%;
+}
+
+
+header {
+    border: 1px solid black;
+    text-align: center;
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+td {
+    font-size: 15px;
+}
+
+.title {
+    font-size: 20px;
+    text-decoration: underline;
+
+    padding-bottom: 10px;
+}
+
+.left { text-align: left; }
+.right { text-align: right; }
+
+input {
+    outline: 0;
+    width: 2ch;
+    border-width: 0 0 1px;
+    border-color: black;
+}
+
+table {
+    width: 100%;
+    border: 1px solid black;
+    padding: 15px;
+}
+
+/* hide number input arrow buttons */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    display: none;
+}
