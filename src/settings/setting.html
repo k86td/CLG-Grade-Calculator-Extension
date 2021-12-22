@@ -6,12 +6,13 @@
     <title>CLG Grade Settings</title>
     <link rel="stylesheet" href="setting.css">
     <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Ubuntu+Mono" />
-    <script src="setting.js"></script>
+    <script src="js/setting.js"></script>
 
     <script>
         // force input to be 2 characters long and truncate if its more than 2
         function forceMaxLength(el) {
-            if (el.value.length > el.maxLength) el.value = el.value.slice(0, el.maxLength);
+            if (parseInt(el.value) > 100) el.value = 100;
+            else if (el.value.length > el.maxLength) el.value = el.value.slice(0, el.maxLength);
         }
     </script>
 </head>
@@ -24,29 +25,30 @@
     <content>
 
         <table>
-            <tr>
+            <!-- <tr>
                 <td class="title left">
                     Nom du cours
                 </td>
                 <td class="title right">
                     Note désiré
                 </td>
-            </tr>
+            </tr> -->
 
             <!-- Generer cette partie automatiquement avec le storage de chrome -->
 
             <tr>
                 <td class="left">
-                    Conception Environnement Intelligent
+                    Note voulus pour les cours
                 </td>
                 <td class="right">
-                    <input min="1" max="99" oninput="forceMaxLength(this)" maxlength="2" type="number">
+                    <input min="1" max="99" oninput="forceMaxLength(this)" maxlength="3" type="number">
                     %
                 </td>
             </tr>
 
             <tr id="add">
                 <td colspan="2">
+                    <a>⟲</a>
                     <a>+</a>
                 </td>
             </tr>
