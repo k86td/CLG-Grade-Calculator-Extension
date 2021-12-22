@@ -1,7 +1,7 @@
 {
     "extends": "../../tsconfig-base.json",
     "compilerOptions": {
-        "outFile": "export/content-script.js",
-        "composite": true
+        "composite": true,
+        "outDir": "export/"
     }
 }

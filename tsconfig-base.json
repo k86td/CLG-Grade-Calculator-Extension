@@ -1,11 +1,10 @@
 {
   "compilerOptions": {
-    "target": "es2016",
-    "module": "system",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
     "strict": true,
-    "skipLibCheck": true,
-    "sourceMap": true
+    "module": "none",
+    "target": "es6",
+    "esModuleInterop": true,
+    "sourceMap": false,
+    "typeRoots": [ "node_modules/@types" ]
   }
 }
