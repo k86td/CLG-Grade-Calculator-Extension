@@ -23,11 +23,11 @@ class Cours {
 
     }
 
-    public afficher (): void {
+    public afficher(): void {
         this.state?.afficher();
     }
 
-    public changerState (state: CoursAffichableState) {
+    public changerState(state: CoursAffichableState) {
         this.state = state;
         this.state.setCours(this);
     }
@@ -41,14 +41,14 @@ class Cours {
 abstract class CoursAffichableState {
     protected cours: Cours | undefined;
 
-    public setCours (cours: Cours) {
+    public setCours(cours: Cours) {
         this.cours = cours;
     }
 
     /**
      * Interacts with the DOM of the webpage to show the average required
      */
-    abstract afficher():void
+    abstract afficher(): void
 
 }
 
@@ -57,7 +57,7 @@ class CoursAffichable extends CoursAffichableState {
     afficher(): void {
         let noteNode: JQuery<HTMLElement> = getNote();
         let newNode: HTMLElement = document.createElement('p');
-        
+
         newNode.innerText = this.generateText();
 
         noteNode.append(newNode);
@@ -67,40 +67,59 @@ class CoursAffichable extends CoursAffichableState {
         if (this.cours === undefined) { return ""; }
 
         let texte: string;
-        
+
         let pointsPossible: number = this.cours.pointsMaximal - this.cours.pointsAccumuler;
         let pointsNecessaire: number = this.cours.pointsVoulus - this.cours.pointsActuelle;
 
-        
+
         if (pointsNecessaire < 0) { texte = "Vous avez déjà atteint votre objectif"; }
         else if (pointsNecessaire > pointsPossible) { texte = "Il est impossible d'atteindre votre objectif"; }
-       
-        else { 
+
+        else {
             let pourcentageNecessaire: number = pointsNecessaire * 100 / pointsPossible;
-            texte = `Il vous manque ${pointsNecessaire}/${pointsPossible} (${pourcentageNecessaire}%)`; 
+            texte = `Il vous manque ${pointsNecessaire}/${pointsPossible} (${pourcentageNecessaire.toFixed(2)}%)`;
         }
 
         return texte;
     }
-    
+
 }
 
 class CoursNonAffichable extends CoursAffichableState {
     afficher(): void { return; }
 }
 
+function isEmpty(obj: Object) {
+    return Object.keys(obj).length === 0;
+}
 
-function CreateCours (): Cours {
-    
+async function CreateCours(): Promise<Cours> {
+
     let noteText: string = getNote().text();
     let cours: Cours;
+    let wanted: number;
 
-    cours = new Cours(25, 40, 60);
+    // grab la note actuelle de l'etudiant
+    let re: RegExp = /(\d+\,\d+) \/ (\d+\,\d+)/;
 
-    if (noteText.includes("0 / 100")) {
-        cours.changerState(new CoursNonAffichable());
+    let note: RegExpMatchArray | null = noteText.match(re);
+
+    let storage: Promise<any> = chrome.storage.sync.get('global');
+    let param = await storage;
+
+
+    if (isEmpty(param)) { wanted = 60; }
+    else { wanted = param.global; }
+
+    if (note !== null) {
+        cours = new Cours(parseFloat(note[1]), parseFloat(note[2]), wanted);
     }
-    else if (noteText.includes("100 / 100")) {
+    else {
+        cours = new Cours(0, 0, 0);
+    }
+
+
+    if (noteText.includes("0,00 / 0,00") || noteText.includes("100 / 100") || noteText.includes("Note finale")) {
         cours.changerState(new CoursNonAffichable());
     }
     else {
@@ -113,9 +132,10 @@ function CreateCours (): Cours {
 let chosen: string = $("a.selected").text();
 
 if (chosen == "Évaluations") {
-    let coursActuelle: Cours = CreateCours();
-
-    coursActuelle.afficher();
-
-    alert("TEST");
+    CreateCours()
+        .then(
+            (cours) => {
+                cours.afficher();
+            }
+        );
 }

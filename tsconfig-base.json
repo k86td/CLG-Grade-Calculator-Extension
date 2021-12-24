@@ -5,6 +5,8 @@
     "target": "es6",
     "esModuleInterop": true,
     "sourceMap": false,
-    "typeRoots": [ "node_modules/@types" ]
+    "typeRoots": [
+      "node_modules/@types"
+    ]
   }
 }
