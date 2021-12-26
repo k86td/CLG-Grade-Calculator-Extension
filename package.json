@@ -6,5 +6,12 @@
   },
   "dependencies": {
     "jquery": "^3.6.0"
+  },
+  "scripts": {
+    "pipeline": "npm run prebuild && npm run build && npm run copy-static && npm run copy-base",
+    "prebuild": "rimraf export",
+    "build": "tsc --build src/content-script && tsc --build src/settings",
+    "copy-static": "copyfiles -u 1 src/settings/*.html src/jquery* src/settings/*.css export",
+    "copy-base": "copyfiles manifest.json images/* export"
   }
 }

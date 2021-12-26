@@ -3,10 +3,12 @@
     "strict": true,
     "module": "none",
     "target": "es6",
+    "declaration": false,
     "esModuleInterop": true,
     "sourceMap": false,
     "typeRoots": [
       "node_modules/@types"
-    ]
+    ],
+    "outDir": "export"
   }
 }

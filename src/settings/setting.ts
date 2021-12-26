@@ -67,8 +67,6 @@ function resetStyle() {
 let saveButton: HTMLElement | null = document.getElementById('save');
 let inputField: HTMLElement | null = document.getElementById('wanted');
 
-
-
 // MAIN //
 
 generateBaseEvent();

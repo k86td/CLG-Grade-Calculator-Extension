@@ -9,19 +9,19 @@
                 "https://portail2.clg.qc.ca/colnet/infocours.asp*"
             ],
             "js": [
-                "/src/jquery-3.6.0.js",
-                "/src/content-script/js/content-script.js"
+                "jquery-3.6.0.js",
+                "content-script.js"
             ],
             "run_at": "document_idle"
         }
     ],
     "action": {
-        "default_popup": "/src/settings/setting.html"
+        "default_popup": "settings/setting.html"
     },
     "icons": {
-        "16": "/images/icon16.png",
-        "48": "/images/icon48.png",
-        "128": "/images/icon128.png"
+        "16": "images/icon16.png",
+        "48": "images/icon48.png",
+        "128": "images/icon128.png"
     },
     "permissions": [
         "storage"
