@@ -155,12 +155,12 @@ async function CreateCours(): Promise<Cours> {
 
 let chosen: string = $("a.selected").text();
 
-async function main(): Promise<void> {
+async function execute(): Promise<void> {
     let cours: Cours = await CreateCours()
 
     cours.afficher();
 }
 
 if (chosen == "Évaluations") {
-    main();
+    execute();
 }
