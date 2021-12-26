@@ -4,10 +4,18 @@
 
 html {
     margin: 25px;
+    width: 400px;
+    height: 300px;
 }
 
 #save {
     cursor: pointer;
+    opacity: .25;
+    color: black;
+}
+
+#save.changes {
+    opacity: 1;
 }
 
 #controls > td:last-child {
@@ -21,7 +29,7 @@ body {
     padding: 25px;
     border: 1px solid black;
     margin: auto;
-    width: 50%;
+    width: 75%;
 }
 
 

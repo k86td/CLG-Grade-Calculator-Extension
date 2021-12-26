@@ -41,19 +41,31 @@ class Cours {
 abstract class CoursAffichableState {
     protected cours: Cours | undefined;
 
+    /**
+     * Permet de definir le cours (contexte) pour le Cours Affichable
+     * @param cours Cours actuelle (sur la page)
+     */
     public setCours(cours: Cours) {
         this.cours = cours;
     }
 
     /**
-     * Interacts with the DOM of the webpage to show the average required
+     * Affiche la moyenne necessaire afin d'atteindre la moyenne voulue
      */
     abstract afficher(): void
 
 }
 
+/**
+ * Represente un cours qui permet d'etre manipuler par l'utilisateur et
+ * offre certain parametre
+ */
 class CoursAffichable extends CoursAffichableState {
 
+    /**
+     * Affiche la moyenne necessaire afin d'atteindre la moyenne qui a ete declarer
+     * dans la page d'options
+     */
     afficher(): void {
         let noteNode: JQuery<HTMLElement> = getNote();
         let newNode: HTMLElement = document.createElement('p');
@@ -63,6 +75,10 @@ class CoursAffichable extends CoursAffichableState {
         noteNode.append(newNode);
     }
 
+    /**
+     * Genere la chaine de caractere a etre afficher sous la note actuelle de l'etudiant
+     * @returns Le chaine de caractere a etre afficher
+     */
     private generateText(): string {
         if (this.cours === undefined) { return ""; }
 
@@ -85,14 +101,22 @@ class CoursAffichable extends CoursAffichableState {
 
 }
 
+/**
+ * Represente un cours qui ne permet pas d'etre modifier
+ */
 class CoursNonAffichable extends CoursAffichableState {
     afficher(): void { return; }
 }
 
-function isEmpty(obj: Object) {
+/**
+ * Teste si obj est vide, ex : '{}'
+ * @param obj L'object a tester
+ */
+function isEmpty(obj: Object): boolean {
     return Object.keys(obj).length === 0;
 }
 
+// TODO migrer fonctione CreateCours vers une factory qui vas generer des CoursAffichableState
 async function CreateCours(): Promise<Cours> {
 
     let noteText: string = getNote().text();
@@ -131,11 +155,12 @@ async function CreateCours(): Promise<Cours> {
 
 let chosen: string = $("a.selected").text();
 
+async function execute(): Promise<void> {
+    let cours: Cours = await CreateCours()
+
+    cours.afficher();
+}
+
 if (chosen == "Évaluations") {
-    CreateCours()
-        .then(
-            (cours) => {
-                cours.afficher();
-            }
-        );
+    execute();
 }
