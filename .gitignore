@@ -2,3 +2,5 @@ src/*/js
 .vscode
 node_modules
 export
+*.crx
+*.pem
