@@ -1,7 +1,7 @@
 {
     "name": "CLG Grade Calculator",
     "description": "This extension exists to make it easier to calculate the average grades one must have to pass",
-    "version": "1.0",
+    "version": "2.0",
     "manifest_version": 3,
     "content_scripts": [
         {
